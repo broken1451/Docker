@@ -1,0 +1,17 @@
+FROM nginx
+
+# RUN echo "1" >> /usr/share/nginx/html/test.txt
+# RUN echo "2" >> /usr/share/nginx/html/test.txt
+# RUN echo "3" >> /usr/share/nginx/html/test.txt
+
+# RUN echo "1" >> /usr/share/nginx/html/test.txt && echo "2" >> /usr/share/nginx/html/test.txt && echo "3" >> /usr/share/nginx/html/test.txt
+
+ENV dir=/usr/share/nginx/html/test.txt 
+
+RUN \ 
+    echo "1" >> $dir && \ 
+    echo "8" >> $dir && \ 
+    echo "3" >> $dir
+# en una misma linea
+
+CMD  "nginx" "-g" "daemon off;"   

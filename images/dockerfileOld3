@@ -1,0 +1,36 @@
+FROM centos:7
+
+LABEL version="1.0"
+
+RUN yum install httpd -y
+
+WORKDIR /var/www/html
+
+# COPY source dest
+# COPY beryllium /var/www/html
+# ADD startbootstrap-freelancer-master /var/www/html
+# COPY startbootstrap-freelancer-master /var/www/html
+# COPY startbootstrap-freelancer-master html
+COPY startbootstrap-freelancer-master .
+
+# ENV contenido pruebaxD
+ENV contenido=pruebaxD
+RUN echo "${contenido}" > /var/www/html/prueba.html
+# EXPOSE 8080
+RUN echo "$(whoami)" > /var/www/html/user1.html
+
+RUN useradd adrian 
+
+USER adrian
+RUN echo "$(whoami)" > /tmp/user3.html
+
+# VOLUME [ "/var/www/html" ]
+
+USER root
+RUN cp /tmp/user3.html /var/www/html/user3.html
+
+# ejecuta el servicio de apache en primer plano
+# CMD ["apachectl","-DFOREGROUND"] 
+# nuestra maquina /  imagen /run.sh
+COPY run.sh /run.sh
+CMD sh /run.sh
